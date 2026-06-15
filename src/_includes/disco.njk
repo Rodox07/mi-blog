@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ titulo }} — {{ artista }} | Mi Blog Y2K</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+  <div class="estrellas-bg" aria-hidden="true"></div>
+
+  <div class="marquee-wrap">
+    <marquee class="marquee-fallback">★ ✦ BIENVENIDO A MI RINCÓN DEL CIBERESPACIO ✦ ★ ACTUALIZADO CON RESEÑAS Y MENSAJES DIARIOS ✦ ★</marquee>
+  </div>
+
+  <header class="header">
+    <h1 class="header__titulo">★ Mi Blog ★</h1>
+  </header>
+
+  <nav class="nav">
+    <a href="/">inicio</a>
+    <a href="/discos/" aria-current="page">reseñas de discos</a>
+    <a href="/mensajes/">mensajes del día</a>
+    <a href="/admin/">✦ entrar ✦</a>
+  </nav>
+
+  <main class="contenedor">
+    <div class="ventana">
+      <div class="ventana__barra">
+        <span>reseña.exe</span>
+        <span class="luces"><span></span><span></span><span></span></span>
+      </div>
+      <div class="ventana__cuerpo">
+        <div class="disco-detalle__header">
+          <img class="disco-detalle__tapa" src="{{ tapa or '/images/disco-default.svg' }}" alt="Tapa de {{ titulo }}">
+          <div class="disco-detalle__info">
+            <h1>{{ titulo }}</h1>
+            <p>por {{ artista }}{% if anio %} · {{ anio }}{% endif %}</p>
+            <p class="disco-detalle__rating">{{ rating | estrellas }}</p>
+          </div>
+        </div>
+        <div class="disco-detalle__texto">
+          {{ content | safe }}
+        </div>
+      </div>
+    </div>
+
+    <a class="boton-volver" href="/discos/">← volver a reseñas</a>
+  </main>
+
+  <footer class="footer">
+    <p>hecho con cariño · paleta CRT · sin cookies raras</p>
+  </footer>
+</body>
+</html>

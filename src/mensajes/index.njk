@@ -1,0 +1,30 @@
+---
+layout: base.njk
+title: Mensajes del día
+permalink: /mensajes/index.html
+---
+
+<div class="ventana">
+  <div class="ventana__barra">
+    <span>para_ti.exe</span>
+    <span class="luces"><span></span><span></span><span></span></span>
+  </div>
+  <div class="ventana__cuerpo">
+    <p>un mensajito por día, con su gif correspondiente 🎀</p>
+    {% if collections.mensajes.length > 0 %}
+      {% for mensaje in collections.mensajes | reverse %}
+        <div class="mensaje-card">
+          <p class="mensaje-card__fecha">{{ mensaje.data.date | fechaLarga }}</p>
+          <p class="mensaje-card__texto">{{ mensaje.data.mensaje }}</p>
+          {% if mensaje.data.gif %}
+            <img class="mensaje-card__gif" src="{{ mensaje.data.gif }}" alt="gif del mensaje del {{ mensaje.data.date | fechaLarga }}" loading="lazy">
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>todavía no hay mensajes. Entrá al <a href="/admin/">panel</a> para crear el primero.</p>
+    {% endif %}
+  </div>
+</div>
+
+<a class="boton-volver" href="/">← volver al inicio</a>

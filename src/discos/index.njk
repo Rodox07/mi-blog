@@ -1,0 +1,33 @@
+---
+layout: base.njk
+title: Reseñas de discos
+permalink: /discos/index.html
+---
+
+<div class="ventana">
+  <div class="ventana__barra">
+    <span>discoteca.exe</span>
+    <span class="luces"><span></span><span></span><span></span></span>
+  </div>
+  <div class="ventana__cuerpo">
+    <p>todos los discos que he reseñado, del más nuevo al más viejo 💿</p>
+    {% if collections.discos.length > 0 %}
+      <div class="discos-lista">
+        {% for disco in collections.discos | reverse %}
+          <a class="disco-card" href="{{ disco.url }}">
+            <div class="disco-card__tapa-wrap">
+              <img class="disco-card__tapa" src="{{ disco.data.tapa or '/images/disco-default.svg' }}" alt="Tapa de {{ disco.data.titulo }}">
+            </div>
+            <p class="disco-card__titulo">{{ disco.data.titulo }}</p>
+            <p class="disco-card__artista">{{ disco.data.artista }}</p>
+            <p class="disco-card__rating">{{ disco.data.rating | estrellas }}</p>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>todavía no hay reseñas. Entrá al <a href="/admin/">panel</a> para crear la primera.</p>
+    {% endif %}
+  </div>
+</div>
+
+<a class="boton-volver" href="/">← volver al inicio</a>

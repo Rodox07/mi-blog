@@ -1,0 +1,411 @@
+/* ============================================
+   Y2K BLOG — paleta y tokens
+   ============================================ */
+:root {
+  --bg-deep: #0a0a2e;
+  --bg-panel: #14146e;
+  --magenta: #ff00cc;
+  --cyan: #00f7ff;
+  --yellow: #fffb00;
+  --silver: #c8d0ff;
+  --white: #ffffff;
+  --border-glow: 0 0 6px var(--cyan), 0 0 12px var(--magenta);
+  --font-display: "Press Start 2P", monospace;
+  --font-body: "VT323", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255,0,204,0.18) 0%, transparent 35%),
+    radial-gradient(circle at 80% 70%, rgba(0,247,255,0.15) 0%, transparent 40%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 3px);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 20px;
+  line-height: 1.5;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Estrellitas animadas de fondo */
+.estrellas-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, var(--white) 50%, transparent 50%),
+    radial-gradient(2px 2px at 80% 10%, var(--cyan) 50%, transparent 50%),
+    radial-gradient(1px 1px at 50% 60%, var(--white) 50%, transparent 50%),
+    radial-gradient(2px 2px at 90% 80%, var(--magenta) 50%, transparent 50%),
+    radial-gradient(1px 1px at 30% 90%, var(--white) 50%, transparent 50%),
+    radial-gradient(2px 2px at 65% 40%, var(--yellow) 50%, transparent 50%);
+  background-repeat: repeat;
+  background-size: 300px 300px;
+  animation: titilar 4s ease-in-out infinite alternate;
+}
+
+@keyframes titilar {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+
+/* ============================================
+   LAYOUT GENERAL
+   ============================================ */
+.contenedor {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 16px 60px;
+}
+
+/* Marquee tipo cartel de neón */
+.marquee-wrap {
+  background: linear-gradient(90deg, var(--magenta), var(--cyan), var(--magenta));
+  background-size: 200% 100%;
+  animation: gradiente-mov 6s linear infinite;
+  border-bottom: 3px dashed var(--yellow);
+  padding: 6px 0;
+}
+
+@keyframes gradiente-mov {
+  to { background-position: 200% 0; }
+}
+
+.marquee-wrap marquee, .marquee-wrap .marquee-fallback {
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--bg-deep);
+  letter-spacing: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.header {
+  text-align: center;
+  padding: 50px 16px 30px;
+}
+
+.header__titulo {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 7vw, 56px);
+  color: var(--yellow);
+  text-shadow:
+    3px 3px 0 var(--magenta),
+    6px 6px 0 var(--cyan);
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+.header__subtitulo {
+  font-size: 18px;
+  color: var(--silver);
+  margin: 14px 0 0;
+  letter-spacing: 1px;
+}
+
+.header__sello {
+  display: inline-block;
+  margin-top: 16px;
+  border: 2px dotted var(--cyan);
+  padding: 4px 14px;
+  font-size: 14px;
+  color: var(--cyan);
+  transform: rotate(-3deg);
+}
+
+/* ============================================
+   NAV — estilo botones de Winamp / barra de tareas
+   ============================================ */
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 24px 0 36px;
+}
+
+.nav a {
+  font-family: var(--font-display);
+  font-size: 12px;
+  text-decoration: none;
+  color: var(--bg-deep);
+  background: var(--silver);
+  border: 2px solid var(--white);
+  border-right-color: #6060a0;
+  border-bottom-color: #6060a0;
+  padding: 10px 16px;
+  box-shadow: 2px 2px 0 #00000080;
+  transition: transform 0.1s ease;
+}
+
+.nav a:hover, .nav a[aria-current="page"] {
+  background: var(--cyan);
+  transform: translateY(2px);
+  box-shadow: 0 0 0 #00000080;
+}
+
+/* ============================================
+   VENTANAS estilo software retro
+   ============================================ */
+.ventana {
+  background: var(--bg-panel);
+  border: 2px solid var(--cyan);
+  box-shadow: var(--border-glow);
+  margin-bottom: 32px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ventana__barra {
+  background: linear-gradient(90deg, var(--magenta), #6a00ff);
+  font-family: var(--font-display);
+  font-size: 11px;
+  color: var(--white);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  letter-spacing: 1px;
+}
+
+.ventana__barra .luces span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-left: 4px;
+  background: var(--yellow);
+  border: 1px solid var(--bg-deep);
+}
+
+.ventana__cuerpo {
+  padding: 20px;
+}
+
+/* ============================================
+   TARJETAS de discos
+   ============================================ */
+.discos-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.disco-card {
+  background: rgba(0,0,0,0.25);
+  border: 2px solid var(--magenta);
+  padding: 12px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--white);
+  display: block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.disco-card:hover {
+  transform: translateY(-4px) rotate(-1deg);
+  box-shadow: var(--border-glow);
+}
+
+.disco-card__tapa-wrap {
+  perspective: 600px;
+  margin-bottom: 10px;
+}
+
+.disco-card__tapa {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--silver);
+  transition: transform 0.6s ease;
+}
+
+.disco-card:hover .disco-card__tapa {
+  transform: rotate(180deg);
+}
+
+.disco-card__titulo {
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--yellow);
+  margin: 6px 0 4px;
+}
+
+.disco-card__artista {
+  font-size: 16px;
+  color: var(--silver);
+  margin: 0 0 6px;
+}
+
+.disco-card__rating {
+  color: var(--cyan);
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+/* Vista de reseña individual */
+.disco-detalle__header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.disco-detalle__tapa {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border: 4px solid var(--silver);
+  border-radius: 50%;
+  animation: girar 8s linear infinite;
+}
+
+@keyframes girar {
+  to { transform: rotate(360deg); }
+}
+
+.disco-detalle__info h1 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--yellow);
+  margin: 0 0 8px;
+}
+
+.disco-detalle__info p {
+  margin: 4px 0;
+  color: var(--silver);
+}
+
+.disco-detalle__rating {
+  color: var(--cyan);
+  font-size: 26px;
+  letter-spacing: 4px;
+}
+
+.disco-detalle__texto {
+  border-top: 2px dashed var(--magenta);
+  padding-top: 16px;
+  margin-top: 16px;
+}
+
+.disco-detalle__texto p {
+  margin: 0 0 14px;
+}
+
+/* ============================================
+   MENSAJES DIARIOS
+   ============================================ */
+.mensaje-card {
+  background: rgba(255,0,204,0.08);
+  border: 2px dashed var(--magenta);
+  padding: 18px;
+  margin-bottom: 22px;
+}
+
+.mensaje-card__fecha {
+  font-family: var(--font-display);
+  font-size: 11px;
+  color: var(--cyan);
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.mensaje-card__texto {
+  font-size: 22px;
+  color: var(--white);
+  margin: 0 0 14px;
+}
+
+.mensaje-card__gif {
+  display: block;
+  max-width: 220px;
+  border: 3px solid var(--yellow);
+  margin: 0 auto;
+}
+
+/* ============================================
+   FOOTER + contador retro
+   ============================================ */
+.footer {
+  text-align: center;
+  padding: 30px 16px 50px;
+  color: var(--silver);
+  font-size: 14px;
+}
+
+.contador {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #000;
+  border: 2px solid var(--cyan);
+  padding: 6px 10px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: var(--yellow);
+  margin-top: 14px;
+}
+
+.contador__digitos {
+  background: #1a1a1a;
+  padding: 2px 6px;
+  letter-spacing: 2px;
+  border: 1px solid var(--magenta);
+}
+
+.boton-volver {
+  display: inline-block;
+  margin-top: 20px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  color: var(--bg-deep);
+  background: var(--yellow);
+  border: 2px solid var(--white);
+  padding: 8px 14px;
+  text-decoration: none;
+}
+
+.boton-volver:hover {
+  background: var(--cyan);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 600px) {
+  body { font-size: 18px; }
+  .header__titulo { font-size: 32px; }
+  .ventana__cuerpo { padding: 14px; }
+  .disco-detalle__header { flex-direction: column; text-align: center; }
+}
+
+/* Respeta preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .estrellas-bg, .marquee-wrap, .disco-card__tapa, .disco-detalle__tapa {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Foco visible para accesibilidad */
+a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 2px;
+}

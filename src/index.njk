@@ -1,0 +1,66 @@
+---
+layout: base.njk
+title: Mi Blog Y2K — Inicio
+---
+
+<div class="ventana">
+  <div class="ventana__barra">
+    <span>readme.txt</span>
+    <span class="luces"><span></span><span></span><span></span></span>
+  </div>
+  <div class="ventana__cuerpo">
+    <p>holaa! este es mi blog personal armado con onda Y2K 💿✨</p>
+    <p>acá voy subiendo <a href="/discos/">reseñas de los discos</a> que voy escuchando, con rating en estrellitas y todo.</p>
+    <p>y también tengo un rincón especial con <a href="/mensajes/">mensajes del día</a> para mi novia, con gifs incluidos 🥰</p>
+    <p>todo se actualiza solo desde un panelcito de administración, sin tocar código.</p>
+  </div>
+</div>
+
+<div class="ventana">
+  <div class="ventana__barra">
+    <span>ultimas_reseñas.exe</span>
+    <span class="luces"><span></span><span></span><span></span></span>
+  </div>
+  <div class="ventana__cuerpo">
+    {% if collections.discos.length > 0 %}
+      <div class="discos-lista">
+        {% for disco in collections.discos | reverse %}
+          {% if loop.index <= 3 %}
+          <a class="disco-card" href="{{ disco.url }}">
+            <div class="disco-card__tapa-wrap">
+              <img class="disco-card__tapa" src="{{ disco.data.tapa or '/images/disco-default.svg' }}" alt="Tapa de {{ disco.data.titulo }}">
+            </div>
+            <p class="disco-card__titulo">{{ disco.data.titulo }}</p>
+            <p class="disco-card__artista">{{ disco.data.artista }}</p>
+            <p class="disco-card__rating">{{ disco.data.rating | estrellas }}</p>
+          </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>todavía no hay reseñas... ¡pronto subo la primera!</p>
+    {% endif %}
+  </div>
+</div>
+
+<div class="ventana">
+  <div class="ventana__barra">
+    <span>mensaje_de_hoy.gif</span>
+    <span class="luces"><span></span><span></span><span></span></span>
+  </div>
+  <div class="ventana__cuerpo">
+    {% if collections.mensajes.length > 0 %}
+      {% set ultimo = (collections.mensajes | reverse)[0] %}
+      <div class="mensaje-card">
+        <p class="mensaje-card__fecha">{{ ultimo.data.date | fechaLarga }}</p>
+        <p class="mensaje-card__texto">{{ ultimo.data.mensaje }}</p>
+        {% if ultimo.data.gif %}
+          <img class="mensaje-card__gif" src="{{ ultimo.data.gif }}" alt="gif del mensaje">
+        {% endif %}
+      </div>
+      <p><a href="/mensajes/">ver todos los mensajes →</a></p>
+    {% else %}
+      <p>todavía no hay mensajes... ¡pronto el primero!</p>
+    {% endif %}
+  </div>
+</div>

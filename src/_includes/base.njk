@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title or "Mi Blog Y2K" }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+  <div class="estrellas-bg" aria-hidden="true"></div>
+
+  <div class="marquee-wrap">
+    <marquee class="marquee-fallback">★ ✦ BIENVENIDO A MI RINCÓN DEL CIBERESPACIO ✦ ★ ACTUALIZADO CON RESEÑAS Y MENSAJES DIARIOS ✦ ★ MEJOR VISTO EN 1024x768 (pero funciona en todo) ★</marquee>
+  </div>
+
+  <header class="header">
+    <h1 class="header__titulo">★ Mi Blog ★</h1>
+    <p class="header__subtitulo">discos que escucho &amp; cositas para mi novia</p>
+    <span class="header__sello">est. 2026</span>
+  </header>
+
+  <nav class="nav">
+    <a href="/" {% if page.url == "/" %}aria-current="page"{% endif %}>inicio</a>
+    <a href="/discos/" {% if "/discos/" in page.url %}aria-current="page"{% endif %}>reseñas de discos</a>
+    <a href="/mensajes/" {% if "/mensajes/" in page.url %}aria-current="page"{% endif %}>mensajes del día</a>
+    <a href="/admin/">✦ entrar ✦</a>
+  </nav>
+
+  <main class="contenedor">
+    {{ content | safe }}
+  </main>
+
+  <footer class="footer">
+    <p>hecho con cariño · paleta CRT · sin cookies raras</p>
+    <div class="contador" aria-hidden="true">
+      <span>VISITAS:</span>
+      <span class="contador__digitos">004217</span>
+    </div>
+  </footer>
+</body>
+</html>

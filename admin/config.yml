@@ -1,0 +1,73 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Necesario para que las imágenes/gifs subidos queden accesibles en el sitio
+media_folder: "images/subidas"
+public_folder: "/images/subidas"
+
+site_url: https://TU-USUARIO.github.io/TU-REPOSITORIO
+display_url: https://TU-USUARIO.github.io/TU-REPOSITORIO
+logo_url: /images/disco-default.svg
+
+collections:
+  - name: "discos"
+    label: "Reseñas de discos"
+    label_singular: "Reseña"
+    folder: "src/discos"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{titulo}} — {{artista}} ({{rating}}★)"
+    fields:
+      - { label: "Título del disco", name: "titulo", widget: "string" }
+      - { label: "Artista", name: "artista", widget: "string" }
+      - { label: "Año", name: "anio", widget: "number", required: false, value_type: "int" }
+      - label: "Puntaje (1 a 5 estrellas)"
+        name: "rating"
+        widget: "select"
+        options: [1, 2, 3, 4, 5]
+        default: 5
+      - label: "Tapa del disco (imagen)"
+        name: "tapa"
+        widget: "image"
+        required: false
+        hint: "Subí una imagen o pegá un link de internet"
+      - label: "Fecha de la reseña"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        date_format: "DD/MM/YYYY"
+        time_format: false
+        default: ""
+      - label: "Tu reseña"
+        name: "body"
+        widget: "markdown"
+
+  - name: "mensajes"
+    label: "Mensajes del día"
+    label_singular: "Mensaje"
+    folder: "src/mensajes"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{date}} — {{mensaje}}"
+    fields:
+      - label: "Fecha"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        date_format: "DD/MM/YYYY"
+        time_format: false
+        default: ""
+      - label: "Mensaje para ella"
+        name: "mensaje"
+        widget: "text"
+      - label: "GIF (subir o pegar link)"
+        name: "gif"
+        widget: "image"
+        required: false
+        choose_url: true
+        hint: "Podés subir un gif desde tu compu o pegar el link de un gif (ej. de Giphy/Tenor, click derecho > copiar link de la imagen)"
